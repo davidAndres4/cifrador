@@ -71,7 +71,8 @@
         android:textAllCaps="false"
         android:onClick="botonera"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/a" />
+        app:layout_constraintTop_toBottomOf="@+id/a"
+        tools:ignore="UsingOnClickInXml" />
 
     <Button
         android:id="@+id/m"

@@ -18,9 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
     private TextView salida;
     private Spinner spinner;
     private Button[] letras = new Button[27];
-    private Button bCifrar, bDescifrar;
     private ImageButton bMayus;
-    private CharSequence ent;
     private boolean mayusClick = false, mayusLongClick = false;
 
     @Override
@@ -64,10 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         letras[25] = (Button) findViewById(R.id.y);
         letras[26] = (Button) findViewById(R.id.z);
 
-        bCifrar = (Button) findViewById(R.id.bCifrar);
-        bDescifrar = (Button) findViewById(R.id.bDescifrar);
         bMayus = (ImageButton) findViewById(R.id.mayus);
-
         bMayus.setOnClickListener(this);
         bMayus.setOnLongClickListener(this);
     }
@@ -76,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         int id;
         id = v.getId();
         Button button = (Button) findViewById(id);
-        ent = entrada.getText().append(button.getText());
+        CharSequence ent = entrada.getText().append(button.getText());
         entrada.setText(ent);
         if (mayusClick) {
             setMinusculas();
@@ -118,7 +113,6 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         String alfabeto = "abcdefghijklmnñopqrstuvwxyz";
         String alfabetoMayus = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
 
-
         for (int i = 0; i < texto.length(); i++) {
             if(Character.isLowerCase(texto.charAt(i))) {
                 int posicion = alfabeto.indexOf(texto.charAt(i));
@@ -140,16 +134,11 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         String alfabeto = "abcdefghijklmnñopqrstuvwxyz";
         String alfabetoMayus = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
 
-        if(n > 27)
-            n %=27;
-
         for (int i = 0; i < texto.length(); i++) {
             if(Character.isLowerCase(texto.charAt(i))) {
                 int posicion = alfabeto.indexOf(texto.charAt(i));
                 if(posicion - n < 0) {
-                    posicion = 0 - (posicion - n);
-
-                    cifrado += alfabeto.charAt(27-posicion);
+                    cifrado += alfabeto.charAt(27 + (posicion - n));
                 }
                 else {
                     cifrado += alfabeto.charAt(posicion - n);
@@ -158,9 +147,7 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
             else {
                 int posicion = alfabetoMayus.indexOf(texto.charAt(i));
                 if(posicion - n < 0) {
-                    posicion = 0 - (posicion - n);
-
-                    cifrado += alfabetoMayus.charAt(27-posicion);
+                    cifrado += alfabetoMayus.charAt(27 + (posicion - n));
                 }
                 else {
                     cifrado += alfabetoMayus.charAt(posicion - n);
